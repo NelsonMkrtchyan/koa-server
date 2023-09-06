@@ -1,0 +1,9 @@
+node_modules/
+apidoc
+src/config/
+dist
+.env
+.DS_Store
+dockerVolumes
+.idea
+.vscode
