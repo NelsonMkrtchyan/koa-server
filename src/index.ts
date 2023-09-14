@@ -1,34 +1,41 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import {testFunction} from "./test";
 import initRouter from "./routes";
+import {Sequelize} from "sequelize";
 
-require('dotenv').config()
+import {config} from "dotenv";
 
-const app = new Koa();
+config();
+
 //Instantiate the Koa object
-const router = new Router();
-
-initRouter(app, () => {
-}).then();
-
-
+const app = new Koa();
 //Instantiate the router
+const router = new Router();
+// set port
 const port = process.env.PORT || 3000;
 
+export const sequelize = new Sequelize(
+  process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5432/venews'
+);
+export const testConnection = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.', process.env.DATABASE_URL);
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+};
+
+
+initRouter(app, router, async () => {
+  await testConnection();
+
+}).then();
+
 //Default empty route
-router.get('/', (ctx, next) => {
-    ctx.body = '/';
+router.get('/', async (ctx) => {
+  ctx.body = '/';
 });
 
-//Named Route
-router.get('/hello', (ctx, next) => {
-    ctx.body = 'Hello World! Yey';
-});
-router.get('/test', (ctx, next) => {
-    ctx.body = testFunction();
-});
-
-app.use(router.routes());           //Use the routes defined using the router
 
 app.listen(port);
