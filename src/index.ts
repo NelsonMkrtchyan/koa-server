@@ -2,6 +2,8 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import initRouter from "./routes";
 import {Sequelize} from "sequelize";
+import bodyParser from 'koa-bodyparser';
+import cors from '@koa/cors';
 
 import {config} from "dotenv";
 
@@ -13,6 +15,14 @@ const app = new Koa();
 const router = new Router();
 // set port
 const port = process.env.PORT || 3000;
+
+app.use(bodyParser());
+
+app.use(
+  cors({
+    exposeHeaders: 'X-Auth-Token',
+  })
+);
 
 export const sequelize = new Sequelize(
   process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5432/venews'
@@ -29,7 +39,6 @@ export const testConnection = async () => {
 
 initRouter(app, router, async () => {
   await testConnection();
-
 }).then();
 
 //Default empty route
