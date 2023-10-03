@@ -34,7 +34,6 @@ export const User = sequelize.define('User', {
     defaultValue: true,
   },
 }, {
-  tableName: 'Users',
   timestamps: true,
   paranoid: true,
 });

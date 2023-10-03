@@ -66,3 +66,24 @@ export async function sendNotification({ids, notification}: SendNotificationInte
   }
 }
 
+export async function deleteInvitationUser() {
+  try {
+    // return await sequelize.query(
+    //   `UPDATE "InvitationsUsers"
+    //          SET "deletedAt" = now()
+    //          FROM "Invitations"
+    //          WHERE "InvitationsUsers"."invitationId" = "Invitations"."id"
+    //            AND "InvitationsUsers"."userId" = ${userId}
+    //            AND "Invitations"."hostId" = ${friendId}`,
+    //   {
+    //     logging: console.log,
+    //     plain: false,
+    //     raw: false,
+    //     type: QueryTypes.SELECT,
+    //   }
+    // );
+  } catch (err) {
+    // throw err;
+  }
+}
+

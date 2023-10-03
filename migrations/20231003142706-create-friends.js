@@ -1,28 +1,25 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('UserPoints', {
+    await queryInterface.createTable('Friends', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      score: {
-        type: Sequelize.INTEGER
-      },
-      purpose: {
-        type: Sequelize.ENUM('registration',
-          'friendRequestAccepted',
-          'friendRequestSentAndAccepted',
-          'invitationRequestAccepted',
-          'invitationRequestSentAndAccepted',
-          'venueRating'),
-        allowNull: false,
-      },
       userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'Users'
+          },
+          key: 'id'
+        }
+      },
+      friendId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -43,7 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('UserPoints');
-    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_UserPoints_purpose";');
+    await queryInterface.dropTable('Friends');
   }
 };
