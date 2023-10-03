@@ -2,6 +2,7 @@ import {sequelize} from '@/index';
 import {DataTypes} from "sequelize";
 import {Post} from "@models/posts";
 import {BusynessScore} from "@models/busynessscore";
+import {UserTotp} from "@models/usertotp";
 
 export const User = sequelize.define('User', {
   firstName: DataTypes.STRING,
@@ -33,6 +34,7 @@ export const User = sequelize.define('User', {
     defaultValue: true,
   },
 }, {
+  tableName: 'Users',
   timestamps: true,
   paranoid: true,
 });
@@ -41,6 +43,8 @@ User.hasMany(Post, {as: 'userId', foreignKey: 'userId'});
 
 
 User.hasMany(BusynessScore); // NEED TO BE CHECKED
+User.hasMany(UserTotp); // NEED TO BE CHECKED
+
 // User.hasMany(Feedback, {foreignKey: 'userId'});
 // User.hasMany(Request, {
 //   foreignKey: 'userId',
