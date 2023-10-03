@@ -8,3 +8,12 @@ export enum ScreensEnum {
     'SingleVenue',
     'SingleEvent'
 }
+
+export enum UserPointsPurposeEnum {
+    'registration',
+    'friendRequestAccepted',
+    'friendRequestSentAndAccepted',
+    'invitationRequestAccepted',
+    'invitationRequestSentAndAccepted',
+    'venueRating'
+}
