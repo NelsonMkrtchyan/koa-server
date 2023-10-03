@@ -1,6 +1,7 @@
-import {Post} from "@models/posts";
 import {sequelize} from '@/index';
 import {DataTypes} from "sequelize";
+import {Post} from "@models/posts";
+import {BusynessScore} from "@models/busynessscore";
 
 export const User = sequelize.define('User', {
   firstName: DataTypes.STRING,
@@ -36,37 +37,37 @@ export const User = sequelize.define('User', {
   paranoid: true,
 });
 User.hasMany(Post, {as: 'userId', foreignKey: 'userId'});
-User.hasOne(Post, {as: 'post', sourceKey: 'id', foreignKey: 'userId'});
+// User.hasOne(Post, {as: 'post', sourceKey: 'id', foreignKey: 'userId'});
 
 
-User.hasMany(BusynessScore);
-User.hasMany(Feedback, {foreignKey: 'userId'});
-User.hasMany(Request, {
-  foreignKey: 'userId',
-  as: 'requestMe',
-});
-User.hasMany(Request, {
-  foreignKey: 'requestId',
-  as: 'request',
-});
-User.hasMany(Friends, {
-  foreignKey: 'friendId',
-  as: 'friend',
-});
-User.hasMany(Friends, {
-  foreignKey: 'userId',
-  as: 'friendMe',
-});
-User.hasMany(Invites, {
-  foreignKey: 'inviting',
-  as: 'inviting',
-});
-User.hasMany(Invites, {
-  foreignKey: 'invited',
-  as: 'invited',
-});
-User.hasMany(VenueUser, {foreignKey: 'userId'});
-User.hasMany(VenueUser, {
-  foreignKey: 'userId',
-  as: 'self',
-});
+User.hasMany(BusynessScore); // NEED TO BE CHECKED
+// User.hasMany(Feedback, {foreignKey: 'userId'});
+// User.hasMany(Request, {
+//   foreignKey: 'userId',
+//   as: 'requestMe',
+// });
+// User.hasMany(Request, {
+//   foreignKey: 'requestId',
+//   as: 'request',
+// });
+// User.hasMany(Friends, {
+//   foreignKey: 'friendId',
+//   as: 'friend',
+// });
+// User.hasMany(Friends, {
+//   foreignKey: 'userId',
+//   as: 'friendMe',
+// });
+// User.hasMany(Invites, {
+//   foreignKey: 'inviting',
+//   as: 'inviting',
+// });
+// User.hasMany(Invites, {
+//   foreignKey: 'invited',
+//   as: 'invited',
+// });
+// User.hasMany(VenueUser, {foreignKey: 'userId'});
+// User.hasMany(VenueUser, {
+//   foreignKey: 'userId',
+//   as: 'self',
+// });

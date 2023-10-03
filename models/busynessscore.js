@@ -9,4 +9,4 @@ export const BusynessScore = sequelize.define('User', {
 
 }, {});
 BusynessScore.belongsTo(User, {as: 'user', foreignKey: 'UserId'});
-BusynessScore.belongsTo(Venue, {as: 'venue', foreignKey: 'VenueId'});
+// BusynessScore.belongsTo(Venue, {as: 'venue', foreignKey: 'VenueId'});
