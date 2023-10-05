@@ -87,3 +87,13 @@ export async function deleteInvitationUser() {
   }
 }
 
+
+export async function deleteCategoriesByIds({ids}: { ids: number[] }) {
+  console.log(ids);
+  // return TagCategory.destroy({
+  //   where: {
+  //     id: ids
+  //   }
+  // });
+}
+
