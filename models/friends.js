@@ -10,6 +10,10 @@ export const Friends = sequelize.define('Friends', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  friendId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 
 }, {
   tableName: 'Friends',

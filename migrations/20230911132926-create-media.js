@@ -2,25 +2,35 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('BusynessScores', {
+    await queryInterface.createTable('Media', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      score: {
-        type: Sequelize.INTEGER
+      url: {
+        type: Sequelize.STRING
       },
-      isReliable: {
-        type: Sequelize.BOOLEAN
+      type: {
+        type: Sequelize.STRING
       },
-      UserId: {
+      venueId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: {
-            tableName: 'Users'
+            tableName: 'Venues'
+          },
+          key: 'id'
+        }
+      },
+      eventId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'Events'
           },
           key: 'id'
         }
@@ -36,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('BusynessScores');
+    await queryInterface.dropTable('Media');
   }
 };
