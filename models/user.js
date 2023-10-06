@@ -4,6 +4,7 @@ import {BusynessScore} from "@models/busynessscore";
 import {UserTotp} from "@models/usertotp";
 import {Feedback} from "@models/feedback";
 import {Friends} from "@models/friends";
+import {VenueUser} from "@models/venueuser";
 
 export const User = sequelize.define('User', {
   firstName: DataTypes.STRING,
@@ -67,8 +68,8 @@ User.hasMany(Friends, {
 //   foreignKey: 'invited',
 //   as: 'invited',
 // });
-// User.hasMany(VenueUser, {foreignKey: 'userId'});
-// User.hasMany(VenueUser, {
-//   foreignKey: 'userId',
-//   as: 'self',
-// });
+User.hasMany(VenueUser, {foreignKey: 'userId'});
+User.hasMany(VenueUser, {
+  foreignKey: 'userId',
+  as: 'self',
+});

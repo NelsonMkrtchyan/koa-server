@@ -3,6 +3,9 @@ import {DataTypes} from "sequelize";
 import {Tag} from "@models/tag";
 import {BusynessScore} from "@models/busynessscore";
 import {Event} from "@models/event";
+import {Follow} from "@models/follow";
+import {Media} from "@models/media";
+import {VenueUser} from "@models/venueuser";
 
 export const Venue = sequelize.define('Venue', {
   name: DataTypes.STRING,
@@ -25,10 +28,10 @@ export const Venue = sequelize.define('Venue', {
 Venue.belongsToMany(Tag, {through: 'VenueTags'});
 Venue.hasMany(Event, {as: 'events'});
 Venue.hasMany(BusynessScore);
-// Venue.hasMany(Follow, {
-//   foreignKey: 'venueId',
-//   as: 'followId',
-// });
+Venue.hasMany(Follow, {
+  foreignKey: 'venueId',
+  as: 'followId',
+});
 // Venue.belongsToMany(Vibes, {
 //   as: 'vibesCategories',
 //   through: 'VenueVibes',
@@ -37,22 +40,22 @@ Venue.hasMany(BusynessScore);
 //   foreignKey: 'venueId',
 //   as: 'invitedVenue',
 // });
-// Venue.hasMany(Media, {
-//   foreignKey: 'venueId',
-//   as: 'mediasVenue',
-// });
-// Venue.hasMany(Media, {
-//   foreignKey: 'venueId',
-//   as: 'media',
-// });
-// Venue.hasMany(VenueUser, {
-//   foreignKey: 'venueId',
-//   as: 'venueUser',
-// });
-// Venue.hasMany(VenueUser, {
-//   foreignKey: 'venueId',
-//   as: 'venueUserSelf',
-// });
+Venue.hasMany(Media, {
+  foreignKey: 'venueId',
+  as: 'mediasVenue',
+});
+Venue.hasMany(Media, {
+  foreignKey: 'venueId',
+  as: 'media',
+});
+Venue.hasMany(VenueUser, {
+  foreignKey: 'venueId',
+  as: 'venueUser',
+});
+Venue.hasMany(VenueUser, {
+  foreignKey: 'venueId',
+  as: 'venueUserSelf',
+});
 // Venue.hasMany(Invitations, {
 //   foreignKey: 'venueId',
 //   as: 'invitation',
