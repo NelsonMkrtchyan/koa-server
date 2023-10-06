@@ -4,6 +4,7 @@ import {Venue} from "@models/venue";
 import {addEventToEs, deleteEventFromEs} from "@/utils/modelHooks";
 import {Media} from "@models/media";
 import {Tag} from "@models/tag";
+import {Vibes} from "@models/vibes";
 
 export const Event = sequelize.define('Event', {
   name: DataTypes.STRING,
@@ -35,14 +36,10 @@ Event.belongsTo(Venue, {
   as: 'VenueId',
 });
 Event.belongsToMany(Tag, {through: 'EventTags'});
-// Event.belongsToMany(Vibes, {
-//   as: 'vibesCategories',
-//   through: 'EventVibes',
-// });
-// Event.hasMany(Invites, {
-//   foreignKey: 'eventId',
-//   as: 'invitedEvent',
-// });
+Event.belongsToMany(Vibes, {
+  as: 'vibesCategories',
+  through: 'EventVibes',
+});
 Event.hasMany(Media, {
   foreignKey: 'eventId',
   as: 'mediasEvent',

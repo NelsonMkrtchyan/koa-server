@@ -6,6 +6,8 @@ import {Event} from "@models/event";
 import {Follow} from "@models/follow";
 import {Media} from "@models/media";
 import {VenueUser} from "@models/venueuser";
+import {Vibes} from "@models/vibes";
+import {Invitations} from "@models/invitations";
 
 export const Venue = sequelize.define('Venue', {
   name: DataTypes.STRING,
@@ -32,14 +34,10 @@ Venue.hasMany(Follow, {
   foreignKey: 'venueId',
   as: 'followId',
 });
-// Venue.belongsToMany(Vibes, {
-//   as: 'vibesCategories',
-//   through: 'VenueVibes',
-// });
-// Venue.hasMany(Invites, {
-//   foreignKey: 'venueId',
-//   as: 'invitedVenue',
-// });
+Venue.belongsToMany(Vibes, {
+  as: 'vibesCategories',
+  through: 'VenueVibes',
+});
 Venue.hasMany(Media, {
   foreignKey: 'venueId',
   as: 'mediasVenue',
@@ -56,7 +54,7 @@ Venue.hasMany(VenueUser, {
   foreignKey: 'venueId',
   as: 'venueUserSelf',
 });
-// Venue.hasMany(Invitations, {
-//   foreignKey: 'venueId',
-//   as: 'invitation',
-// });
+Venue.hasMany(Invitations, {
+  foreignKey: 'venueId',
+  as: 'invitation',
+});

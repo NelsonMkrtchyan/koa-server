@@ -2,6 +2,8 @@ import {sequelize} from "@/index";
 import {DataTypes} from "sequelize";
 import {deleteTagFromES, tagsHandler} from "@/utils/modelHooks";
 import {TagCategory} from "@models/tagcategory";
+import {Venue} from "@models/venue";
+import {Event} from "@models/event";
 
 export const Tag = sequelize.define('Tag', {
   name: {
@@ -25,8 +27,8 @@ export const Tag = sequelize.define('Tag', {
 });
 
 
-// Tag.belongsToMany(Venue, {through: 'VenueTags'});
-// Tag.belongsToMany(Event, {through: 'EventTags'});
+Tag.belongsToMany(Venue, {through: 'VenueTags'});
+Tag.belongsToMany(Event, {through: 'EventTags'});
 Tag.belongsTo(TagCategory, {
   foreignKey: 'categoryId',
   as: 'category',
