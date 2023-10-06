@@ -63,7 +63,7 @@ export async function addEventToEs({
   // const venue = await Venue.findOne({
   //   where: { id: VenueId },
   //   raw: true,
-  // }); // TODO: Remove this dependency problem
+  // });
   //
   // await client.index({
   //   index: INDEX_EVENTS,
