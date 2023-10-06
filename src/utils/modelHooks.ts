@@ -89,3 +89,26 @@ export async function deleteEventFromEs({id}: { id: number }) {
   //   id,
   // });
 }
+
+
+// model ---> Vibes
+
+export async function vibesHandler({id, name}: { id: number, name: string }) {
+  console.log(id, name);
+  // await client.index({
+  //     index: INDEX_VIBES,
+  //     id,
+  //     body: {
+  //         id,
+  //         name,
+  //     },
+  // });
+}
+
+export async function deleteVibesFromES({id}: { id: number }) {
+  console.log(id);
+  // await client.delete({
+  //     index: INDEX_VIBES,
+  //     id,
+  // });
+}
