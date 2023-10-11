@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "ISC",
+  "type": "commonjs",
   "scripts": {
     "startTest": "nodemon src/index.ts",
     "start": "npx nodemon",
@@ -15,11 +16,14 @@
     "@models/*": "./models/*"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^7.4.0",
     "@koa/cors": "^4.0.0",
+    "@sendgrid/mail": "^7.7.0",
     "@types/glob": "^8.1.0",
     "@types/koa": "^2.13.6",
     "@types/koa-router": "^7.4.4",
     "dotenv": "^16.3.1",
+    "firebase-admin": "^11.11.0",
     "glob": "^10.3.3",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.1",
