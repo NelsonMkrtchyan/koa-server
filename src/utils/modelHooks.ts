@@ -1,6 +1,12 @@
-// model ---> Tag
+import {sequelize} from "@/index";
+import {QueryTypes} from 'sequelize';
 
-export async function tagsHandler({id, name, categoryId}: { id: number, name: string, categoryId: number }) {
+// model ---> Tag
+export async function tagsHandler({id, name, categoryId}: {
+    id: number,
+    name: string,
+    categoryId: number
+}) {
   console.log(id, name, categoryId);
   // const venueTypeCategoryIds = await TagCategory.findAll({
   //     where: {
@@ -20,14 +26,15 @@ export async function tagsHandler({id, name, categoryId}: { id: number, name: st
   // }
 }
 
-export async function deleteTagFromES({id}: { id: number }) {
+export async function deleteTagFromES({id}: {
+    id: number
+}) {
   console.log(id);
   // await client.delete({
   //   index: INDEX_TAGS,
   //   id,
   // });
 }
-
 
 //model ---> Event
 export async function addEventToEs({
@@ -82,7 +89,9 @@ export async function addEventToEs({
   // });
 }
 
-export async function deleteEventFromEs({id}: { id: number }) {
+export async function deleteEventFromEs({id}: {
+    id: number
+}) {
   console.log(id);
   // await client.delete({
   //   index: INDEX_EVENTS,
@@ -90,10 +99,11 @@ export async function deleteEventFromEs({id}: { id: number }) {
   // });
 }
 
-
 // model ---> Vibes
-
-export async function vibesHandler({id, name}: { id: number, name: string }) {
+export async function vibesHandler({id, name}: {
+    id: number,
+    name: string
+}) {
   console.log(id, name);
   // await client.index({
   //     index: INDEX_VIBES,
@@ -105,10 +115,36 @@ export async function vibesHandler({id, name}: { id: number, name: string }) {
   // });
 }
 
-export async function deleteVibesFromES({id}: { id: number }) {
+export async function deleteVibesFromES({id}: {
+    id: number
+}) {
   console.log(id);
   // await client.delete({
   //     index: INDEX_VIBES,
   //     id,
   // });
 }
+
+// model ---> Friends
+export async function deleteInvitationUser({userId, friendId}: {
+    userId: number,
+    friendId: number
+}) {
+  return await sequelize.query(
+    `UPDATE "InvitationsUsers"
+         SET "deletedAt" = now()
+         FROM "Invitations"
+         WHERE "InvitationsUsers"."invitationId" = "Invitations"."id"
+           AND "InvitationsUsers"."userId" = ${userId}
+           AND "Invitations"."hostId" = ${friendId}`,
+    {
+      logging: console.log,
+      plain: false,
+      raw: false,
+      type: QueryTypes.SELECT,
+    }
+  );
+
+}
+
+

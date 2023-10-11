@@ -4,10 +4,23 @@ import initRouter from "./routes";
 import {Sequelize} from "sequelize";
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
-
 import {config} from "dotenv";
 
+import admin from "firebase-admin";
+import {firebaseDatabaseURL, serviceAccount} from "@/config";
+import {Client} from "@elastic/elasticsearch";
+
+// elasticsearch version 7.4 in aws
+const client = new Client({
+  node: 'https://search-venews-prod-2jl5ihazayyhqhqg367ciwffha.ap-southeast-2.es.amazonaws.com',
+});
+
 config();
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: firebaseDatabaseURL,
+});
 
 //Instantiate the Koa object
 const app = new Koa();
@@ -39,6 +52,9 @@ export const testConnection = async () => {
 
 initRouter(app, router, async () => {
   await testConnection();
+  client.info().then((r) => {
+    console.log('r ---------->', r, 'elasticsearch is available');
+  });
 }).then();
 
 //Default empty route

@@ -1,11 +1,11 @@
-export interface NotificationInterface {
+export type NotificationType = {
     title: string;
     body: never;
     channelId: string;
-    data?: never;
+    data?: any;
 }
 
 export interface SendNotificationInterface {
     ids: number[],
-    notification: NotificationInterface
+    notification: NotificationType
 }

@@ -1,7 +1,7 @@
 import {sequelize} from "@/index";
 import {DataTypes} from "sequelize";
 import {User} from "@models/user";
-import {deleteInvitationUser} from "@/utils/modelUtils";
+import {deleteInvitationUser} from "@/utils/modelHooks";
 
 export const Friends = sequelize.define('Friends', {
   totp: DataTypes.INTEGER,
