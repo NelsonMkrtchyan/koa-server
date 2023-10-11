@@ -17,6 +17,8 @@ export const UserPoint = sequelize.define('UserPoint', {
 
 }, {
   tableName: 'UserPoints',
+  timestamps: true,
+  paranoid: true
 });
 
 UserPoint.belongsTo(User, {as: 'user', foreignKey: 'userId'});
